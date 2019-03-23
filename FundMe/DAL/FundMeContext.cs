@@ -7,7 +7,7 @@ using System.Data.Entity;
 
 namespace FundMe.DAL
 {
-    public class FundMeContex : DbContext
+    public class FundMeContext : DbContext
     {
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<Category> Categories { get; set; }

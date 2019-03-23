@@ -13,7 +13,7 @@ namespace FundMe.Controllers
 {
     public class CampaignsController : Controller
     {
-        private FundMeContex db = new FundMeContex();
+        private FundMeContext db = new FundMeContext();
 
         // GET: Campaigns
         public ActionResult Index(string category)

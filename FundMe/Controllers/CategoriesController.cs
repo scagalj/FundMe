@@ -13,7 +13,7 @@ namespace FundMe.Controllers
 {
     public class CategoriesController : Controller
     {
-        private FundMeContex db = new FundMeContex();
+        private FundMeContext db = new FundMeContext();
 
         // GET: Categories
         public ActionResult Index()

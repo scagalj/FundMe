@@ -24,10 +24,11 @@ namespace FundMe.Models
         [DisplayFormat(DataFormatString = "{0:c}")]
         public int CampaignsGoal { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
         public int? CategoryID { get; set; }
-        public int PictureID { get; set; }
+        public int? PictureID { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual Picture Picture { get; set; }
