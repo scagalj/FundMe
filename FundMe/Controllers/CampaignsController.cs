@@ -16,13 +16,24 @@ namespace FundMe.Controllers
         private FundMeContext db = new FundMeContext();
 
         // GET: Campaigns
-        public ActionResult Index(string category)
+        public ActionResult Index(string category, string search)
         {
             var campaigns = db.Campaigns.Include(c => c.Category).Include(c => c.Picture);
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                campaigns = campaigns.Where(c => c.Title.Contains(search) || c.Description.Contains(search) || c.Category.Name.Contains(search));
+                ViewBag.Search = search;
+            }
+
+            var categories = campaigns.OrderBy(c => c.Category.Name).Select(c => c.Category.Name).Distinct();
+
             if (!String.IsNullOrEmpty(category))
             {
                 campaigns = campaigns.Where(c => c.Category.Name == category);
             }
+            ViewBag.Category = new SelectList(categories);
+
             return View(campaigns.ToList());
         }
 

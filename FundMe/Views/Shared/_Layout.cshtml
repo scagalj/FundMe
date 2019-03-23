@@ -25,6 +25,13 @@
                     <li>@Html.ActionLink("Category","Index", "Categories")</li>
                     <li>@Html.ActionLink("Campaigns","Index", "Campaigns")</li>
                 </ul>
+                @using (Html.BeginForm("Index","Campaigns",FormMethod.Get, new { @class = "navbar-form navbar.left" }))
+                {
+                    <div class="form-group">
+                        @Html.TextBox("Search",null,new { @class="form-control", @placeholder= "Search Products"})
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                }
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
