@@ -212,6 +212,10 @@
     <Compile Include="Migrations\201903231130578_Add-Data.Designer.cs">
       <DependentUpon>201903231130578_Add-Data.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903231259208_CampaignsModelUpdate.cs" />
+    <Compile Include="Migrations\201903231259208_CampaignsModelUpdate.Designer.cs">
+      <DependentUpon>201903231259208_CampaignsModelUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Adress.cs" />
@@ -315,6 +319,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903231130578_Add-Data.resx">
       <DependentUpon>201903231130578_Add-Data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903231259208_CampaignsModelUpdate.resx">
+      <DependentUpon>201903231259208_CampaignsModelUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

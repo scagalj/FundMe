@@ -44,7 +44,7 @@ namespace FundMe.Controllers
         // GET: Campaigns/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Naziv");
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name");
             ViewBag.PictureID = new SelectList(db.Pictures, "ID", "FileName");
             return View();
         }
@@ -56,6 +56,7 @@ namespace FundMe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Title,Description,CampaignsGoal,Date,CategoryID,PictureID")] Campaign campaign)
         {
+            campaign.CurrentlyRaised = 0;
             if (ModelState.IsValid)
             {
                 db.Campaigns.Add(campaign);
@@ -63,7 +64,7 @@ namespace FundMe.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Naziv", campaign.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", campaign.CategoryID);
             ViewBag.PictureID = new SelectList(db.Pictures, "ID", "FileName", campaign.PictureID);
             return View(campaign);
         }
@@ -80,7 +81,7 @@ namespace FundMe.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Naziv", campaign.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", campaign.CategoryID);
             ViewBag.PictureID = new SelectList(db.Pictures, "ID", "FileName", campaign.PictureID);
             return View(campaign);
         }
@@ -98,7 +99,7 @@ namespace FundMe.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Naziv", campaign.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", campaign.CategoryID);
             ViewBag.PictureID = new SelectList(db.Pictures, "ID", "FileName", campaign.PictureID);
             return View(campaign);
         }

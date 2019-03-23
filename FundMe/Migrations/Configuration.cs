@@ -33,9 +33,9 @@ namespace FundMe.Migrations
 
                 var campaign = new List<Campaign>
             {
-                new Campaign{ Title = "One way to explore" , Description = "One way or another",CampaignsGoal=100, CategoryID=categories.Single(c => c.Name == "Hrana").ID, Date=DateTime.Now },
-                new Campaign{ Title = "Travel to America" , Description = "Travel to America wiht my bag",CampaignsGoal=500, CategoryID=categories.Single(c => c.Name == "Putovanje").ID,Date=DateTime.Now },
-                new Campaign{ Title = "Game to Develope" , Description = "Arcade Game Developements",CampaignsGoal=250, CategoryID=categories.Single(c => c.Name == "Igraèke").ID,Date=DateTime.Now }
+                new Campaign{ Title = "One way to explore" , Description = "One way or another",CampaignsGoal=100, CategoryID=categories.Single(c => c.Name == "Hrana").ID, Date=DateTime.Now,CurrentlyRaised=0 },
+                new Campaign{ Title = "Travel to America" , Description = "Travel to America wiht my bag",CampaignsGoal=500, CategoryID=categories.Single(c => c.Name == "Putovanje").ID,Date=DateTime.Now,CurrentlyRaised=0 },
+                new Campaign{ Title = "Game to Develope" , Description = "Arcade Game Developements",CampaignsGoal=250, CategoryID=categories.Single(c => c.Name == "Igraèke").ID,Date=DateTime.Now, CurrentlyRaised=0 }
             };
 
                 campaign.ForEach(c => context.Campaigns.AddOrUpdate(p => p.Title, c));

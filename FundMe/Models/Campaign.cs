@@ -19,10 +19,16 @@ namespace FundMe.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
+        [Display(Name = "Campaigns Goal")]
         [Required(ErrorMessage = "Champaigns Goal can't be empty")]
         [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:c}")]
         public int CampaignsGoal { get; set; }
+
+        [Display(Name = "Currently Raised")]
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        public int CurrentlyRaised { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
