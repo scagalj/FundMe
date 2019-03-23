@@ -16,9 +16,13 @@ namespace FundMe.Controllers
         private FundMeContex db = new FundMeContex();
 
         // GET: Campaigns
-        public ActionResult Index()
+        public ActionResult Index(string category)
         {
             var campaigns = db.Campaigns.Include(c => c.Category).Include(c => c.Picture);
+            if (!String.IsNullOrEmpty(category))
+            {
+                campaigns = campaigns.Where(c => c.Category.Name == category);
+            }
             return View(campaigns.ToList());
         }
 

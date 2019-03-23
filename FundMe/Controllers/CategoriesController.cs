@@ -18,7 +18,7 @@ namespace FundMe.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            return View(db.Categories.OrderBy(c=>c.Name).ToList());
         }
 
         // GET: Categories/Details/5
@@ -47,7 +47,7 @@ namespace FundMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Naziv")] Category category)
+        public ActionResult Create([Bind(Include = "ID,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace FundMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Naziv")] Category category)
+        public ActionResult Edit([Bind(Include = "ID,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
