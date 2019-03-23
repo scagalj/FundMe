@@ -62,7 +62,7 @@ namespace FundMe.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Donate(int donate, int id)
+        public ActionResult Donate(int donate, int? id)
         {
             if (id == null)
             {
