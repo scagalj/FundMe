@@ -67,6 +67,18 @@
 
     </dl>
 </div>
+<div>
+    @using (Html.BeginForm("Donate", "Campaigns", FormMethod.Post))
+    {
+
+        @Html.AntiForgeryToken()
+        <input type="number" name="donate" />
+        <input type="hidden" name="id" id="id" value="@Model.ID" />
+        <input type="submit" />
+    }
+
+</div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")

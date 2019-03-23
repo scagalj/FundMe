@@ -60,6 +60,29 @@ namespace FundMe.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Donate(int donate, int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var camp = db.Campaigns.Find(id);
+            if (camp == null)
+            {
+                return HttpNotFound();
+            }
+
+            camp.CurrentlyRaised += donate;
+            if (ModelState.IsValid)
+            {
+                db.Entry(camp).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return Redirect("Details/" + id);
+        }
+
         // POST: Campaigns/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
