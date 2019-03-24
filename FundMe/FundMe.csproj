@@ -218,6 +218,10 @@
     <Compile Include="Migrations\201903231259208_CampaignsModelUpdate.Designer.cs">
       <DependentUpon>201903231259208_CampaignsModelUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903231651268_Update-Image.cs" />
+    <Compile Include="Migrations\201903231651268_Update-Image.Designer.cs">
+      <DependentUpon>201903231651268_Update-Image.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Adress.cs" />
@@ -225,7 +229,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Images.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -298,7 +302,7 @@
     <Content Include="Views\Campaigns\Details.cshtml" />
     <Content Include="Views\Campaigns\Edit.cshtml" />
     <Content Include="Views\Campaigns\Index.cshtml" />
-    <Content Include="Views\Images\Create.cshtml" />
+    <Content Include="Views\Images\Upload.cshtml" />
     <Content Include="Views\Images\Delete.cshtml" />
     <Content Include="Views\Images\Details.cshtml" />
     <Content Include="Views\Images\Edit.cshtml" />
@@ -330,6 +334,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903231259208_CampaignsModelUpdate.resx">
       <DependentUpon>201903231259208_CampaignsModelUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903231651268_Update-Image.resx">
+      <DependentUpon>201903231651268_Update-Image.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

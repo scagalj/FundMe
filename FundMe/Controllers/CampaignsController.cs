@@ -56,7 +56,7 @@ namespace FundMe.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name");
-            ViewBag.PictureID = new SelectList(db.Pictures, "ID", "FileName");
+            ViewBag.PictureID = new SelectList(db.Images, "ID", "FileName");
             return View();
         }
 
@@ -99,7 +99,7 @@ namespace FundMe.Controllers
             }
 
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", campaign.CategoryID);
-            ViewBag.PictureID = new SelectList(db.Pictures, "ID", "FileName", campaign.PictureID);
+            ViewBag.PictureID = new SelectList(db.Images, "ID", "FileName", campaign.PictureID);
             return View(campaign);
         }
 
@@ -116,7 +116,7 @@ namespace FundMe.Controllers
                 return HttpNotFound();
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", campaign.CategoryID);
-            ViewBag.PictureID = new SelectList(db.Pictures, "ID", "FileName", campaign.PictureID);
+            ViewBag.PictureID = new SelectList(db.Images, "ID", "FileName", campaign.PictureID);
             return View(campaign);
         }
 
@@ -134,7 +134,7 @@ namespace FundMe.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", campaign.CategoryID);
-            ViewBag.PictureID = new SelectList(db.Pictures, "ID", "FileName", campaign.PictureID);
+            ViewBag.PictureID = new SelectList(db.Images, "ID", "FileName", campaign.PictureID);
             return View(campaign);
         }
 

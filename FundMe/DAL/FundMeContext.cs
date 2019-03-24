@@ -11,7 +11,7 @@ namespace FundMe.DAL
     {
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Images> Pictures { get; set; }
+        public DbSet<Image> Images { get; set; }
 
     }
 }

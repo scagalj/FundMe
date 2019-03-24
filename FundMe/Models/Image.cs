@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FundMe.Models
 {
-    public class Images
+    public class Image
     {
         public int ID { get; set; }
         [Display(Name = "File")]

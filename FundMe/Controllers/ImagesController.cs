@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using FundMe.DAL;
 using FundMe.Models;
@@ -18,7 +19,7 @@ namespace FundMe.Controllers
         // GET: Images
         public ActionResult Index()
         {
-            return View(db.Pictures.ToList());
+            return View(db.Images.ToList());
         }
 
         // GET: Images/Details/5
@@ -28,7 +29,7 @@ namespace FundMe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Images images = db.Pictures.Find(id);
+            Image images = db.Images.Find(id);
             if (images == null)
             {
                 return HttpNotFound();
@@ -37,7 +38,7 @@ namespace FundMe.Controllers
         }
 
         // GET: Images/Create
-        public ActionResult Create()
+        public ActionResult Upload()
         {
             return View();
         }
@@ -47,16 +48,37 @@ namespace FundMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FileName")] Images images)
+        public ActionResult Upload(HttpPostedFileBase file)
         {
+            if(file != null)
+            {
+                if (ValidateFile(file))
+                {
+                    try
+                    {
+                        SaveFileToDisk(file);
+                    }
+                    catch (Exception)
+                    {
+                        ModelState.AddModelError("FileName", "Sorry an error occurred saving the file to disk, please try again");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("FileName", "The file must be gif, png, jpeg or jpg and less than 2MB in size");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("FileName", "Please choose a file");
+            }
             if (ModelState.IsValid)
             {
-                db.Pictures.Add(images);
+                db.Images.Add(new Image { FileName = file.FileName });
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(images);
+            return View();
         }
 
         // GET: Images/Edit/5
@@ -66,7 +88,7 @@ namespace FundMe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Images images = db.Pictures.Find(id);
+            Image images = db.Images.Find(id);
             if (images == null)
             {
                 return HttpNotFound();
@@ -79,7 +101,7 @@ namespace FundMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FileName")] Images images)
+        public ActionResult Edit([Bind(Include = "ID,FileName")] Image images)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +119,7 @@ namespace FundMe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Images images = db.Pictures.Find(id);
+            Image images = db.Images.Find(id);
             if (images == null)
             {
                 return HttpNotFound();
@@ -110,8 +132,8 @@ namespace FundMe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Images images = db.Pictures.Find(id);
-            db.Pictures.Remove(images);
+            Image images = db.Images.Find(id);
+            db.Images.Remove(images);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -124,5 +146,33 @@ namespace FundMe.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private bool ValidateFile(HttpPostedFileBase file)
+        {
+            string fileExtension = System.IO.Path.GetExtension(file.FileName).ToLower();
+            string[] allowedFileTypes = { ".gif", ".png", ".jpeg", ".jpg" };
+            if ((file.ContentLength > 0 && file.ContentLength < 2097152) &&
+            allowedFileTypes.Contains(fileExtension))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void SaveFileToDisk(HttpPostedFileBase file)
+        {
+            WebImage img = new WebImage(file.InputStream);
+            if (img.Width > 190)
+            {
+                img.Resize(220, img.Height);
+            }
+            img.Save(Constants.Constants.CampaignsImagePath + file.FileName);
+            if (img.Width > 100)
+            {
+                img.Resize(100, img.Height);
+            }
+            img.Save(Constants.Constants.CampaignsThumbnailsPath + file.FileName);
+        }
+
     }
 }

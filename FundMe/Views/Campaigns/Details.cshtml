@@ -70,10 +70,10 @@
 <div>
     @using (Html.BeginForm("Donate", "Campaigns", FormMethod.Post))
     {
+         @Html.AntiForgeryToken()
 
-        @Html.AntiForgeryToken()
         <input type="number" name="donate" />
-        <input type="hidden" name="id" id="id" value="@Model.ID" />
+        @Html.HiddenFor(model => model.ID);
         <input type="submit" />
     }
 
