@@ -141,7 +141,6 @@ namespace FundMe.Controllers
             }
             campaign.CurrentlyRaised = LoadDonation(campaign.ID);
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", campaign.CategoryID);
-            ViewBag.PictureID = new SelectList(db.Images, "ID", "FileName", campaign.PictureID);
             return View(campaign);
         }
 
