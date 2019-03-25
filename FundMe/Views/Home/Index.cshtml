@@ -61,6 +61,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
+            <td>
+                @Html.ActionLink("Details", "Details","Campaigns", new { id = item.ID },null)
+            </td>
         </tr>
     }
 

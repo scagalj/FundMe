@@ -19,6 +19,7 @@ namespace FundMe.Controllers
         // GET: Images
         public ActionResult Index()
         {
+            ViewBag.Path = Constants.Constants.CampaignsThumbnailsPath;
             return View(db.Images.ToList());
         }
 
@@ -34,6 +35,7 @@ namespace FundMe.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Path = Constants.Constants.CampaignsImagePath;
             return View(images);
         }
 
@@ -124,6 +126,7 @@ namespace FundMe.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Path = Constants.Constants.CampaignsImagePath;
             return View(images);
         }
 
@@ -133,6 +136,13 @@ namespace FundMe.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Image images = db.Images.Find(id);
+            System.IO.File.Delete(Request.MapPath(Constants.Constants.CampaignsImagePath + images.FileName));
+            System.IO.File.Delete(Request.MapPath(Constants.Constants.CampaignsThumbnailsPath + images.FileName));
+            var camp = db.Campaigns.Where(c => c.PictureID == id);
+            foreach (var c in camp)
+            {
+                c.PictureID = null;
+            }
             db.Images.Remove(images);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -51,6 +51,7 @@ namespace FundMe.Controllers
                 return HttpNotFound();
             }
             campaign.CurrentlyRaised = LoadDonation(campaign.ID);
+            ViewBag.Path = Constants.Constants.CampaignsImagePath;
 
             //Popis svih donacija
             var donations = db.Donations.Where(d => d.CampaignID == id).OrderByDescending(d => d.DonationDate).ToList();
