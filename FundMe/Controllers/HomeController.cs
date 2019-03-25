@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FundMe.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,18 @@ namespace FundMe.Controllers
 {
     public class HomeController : Controller
     {
+        private FundMeContext db = new FundMeContext();
+
         public ActionResult Index()
         {
-            return View();
+            var top5 = (from c in db.Campaigns
+                        orderby c.CurrentlyRaised descending
+                        select c).Take(3);
+
+            ViewBag.Path = Constants.Constants.CampaignsThumbnailsPath;
+            return View(top5.ToList());
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

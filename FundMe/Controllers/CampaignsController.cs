@@ -35,8 +35,6 @@ namespace FundMe.Controllers
             }
             ViewBag.Category = new SelectList(categories);
             ViewBag.Path = Constants.Constants.CampaignsThumbnailsPath;
-            campaigns.ToList().ForEach(c => c.CurrentlyRaised = LoadDonation(c.ID));
-
             return View(campaigns.ToList());
         }
 
@@ -88,6 +86,7 @@ namespace FundMe.Controllers
                 DonationDate = DateTime.Now
             };
 
+            SaveDonation(camp, donate);
             if (ModelState.IsValid)
             {
                 db.Donations.Add(donation);
@@ -201,6 +200,18 @@ namespace FundMe.Controllers
         private int LoadDonation(int id)
         {
             return db.Donations.Where(d => d.CampaignID == id).Select(c => c.Iznos).DefaultIfEmpty(0).Sum();
+        }
+
+        private void SaveDonation(Campaign campaign, int donation)
+        {
+            campaign.CurrentlyRaised += donation;
+            if (ModelState.IsValid)
+            {
+                db.Entry(campaign).State = EntityState.Modified;
+                db.SaveChanges();
+               
+            }
+
         }
     }
 }
