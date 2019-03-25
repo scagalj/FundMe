@@ -10,5 +10,10 @@ namespace FundMe.Models
         [StringLength(100)]
         [Index(IsUnique = true)]
         public string FileName { get; set; }
+
+        public override string ToString()
+        {
+            return FileName;
+        }
     }
 }

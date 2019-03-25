@@ -98,6 +98,7 @@ namespace FundMe.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Category category = db.Categories.Find(id);
+            
             if (category == null)
             {
                 return HttpNotFound();
@@ -112,6 +113,13 @@ namespace FundMe.Controllers
         {
             Category category = db.Categories.Find(id);
             db.Categories.Remove(category);
+
+            var camp = db.Campaigns.Where(c => c.CategoryID == id);
+            foreach (var c in camp)
+            {
+                c.CategoryID = null;
+            }
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }

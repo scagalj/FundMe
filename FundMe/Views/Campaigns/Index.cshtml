@@ -51,7 +51,10 @@
                 @Html.DisplayFor(modelItem => item.Category.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Picture.FileName)
+                @if (item.Picture != null)
+                {
+                <img src="@Url.Content(String.Format("{0}{1}", ViewBag.Path, item.Picture.FileName))" />
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)

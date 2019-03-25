@@ -34,7 +34,7 @@ namespace FundMe.Controllers
                 campaigns = campaigns.Where(c => c.Category.Name == category);
             }
             ViewBag.Category = new SelectList(categories);
-
+            ViewBag.Path = Constants.Constants.CampaignsThumbnailsPath;
             campaigns.ToList().ForEach(c => c.CurrentlyRaised = LoadDonation(c.ID));
 
             return View(campaigns.ToList());
@@ -101,9 +101,20 @@ namespace FundMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Description,CampaignsGoal,Date,CategoryID,PictureID")] Campaign campaign)
+        public ActionResult Create([Bind(Include = "ID,Title,Description,CampaignsGoal,Date,CategoryID")] Campaign campaign, HttpPostedFileBase file)
         {
+            ImagesController images = new ImagesController();
+            images.Upload(file);
+
+
             campaign.CurrentlyRaised = 0;
+            //campaign.PictureID = db.Images.Single(i => i.FileName == file.FileName).ID;
+            Image image = db.Images.Single(i => i.FileName == file.FileName);
+            if(image != null)
+            {
+                campaign.Picture = image;
+                campaign.PictureID = image.ID;
+            }
             if (ModelState.IsValid)
             {
                 db.Campaigns.Add(campaign);
