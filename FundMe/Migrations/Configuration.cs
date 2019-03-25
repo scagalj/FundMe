@@ -40,6 +40,18 @@ namespace FundMe.Migrations
 
                 campaign.ForEach(c => context.Campaigns.AddOrUpdate(p => p.Title, c));
                 context.SaveChanges();
+
+                var donation = new List<Donation>
+                {
+                    new Donation{Iznos = 10, CampaignID = campaign.Single(c => c.ID ==3).ID,DonationDate = DateTime.Now},
+                    new Donation{Iznos = 50, CampaignID = campaign.Single(c => c.ID ==2).ID,DonationDate = DateTime.Now},
+                    new Donation{Iznos = 30, CampaignID = campaign.Single(c => c.ID ==3).ID,DonationDate = DateTime.Now},
+                    new Donation{Iznos = 25, CampaignID = campaign.Single(c => c.ID ==4).ID,DonationDate = DateTime.Now},
+                    new Donation{Iznos = 15, CampaignID = campaign.Single(c => c.ID ==2).ID,DonationDate = DateTime.Now}
+                };
+
+                donation.ForEach(c => context.Donations.AddOrUpdate(p => p.ID, c));
+                context.SaveChanges();
             }
             catch (DbEntityValidationException e)
             {

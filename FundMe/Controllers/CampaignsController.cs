@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using FundMe.DAL;
 using FundMe.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace FundMe.Controllers
 {
@@ -19,7 +20,7 @@ namespace FundMe.Controllers
         public ActionResult Index(string category, string search)
         {
             var campaigns = db.Campaigns.Include(c => c.Category).Include(c => c.Picture);
-
+            
             if (!String.IsNullOrEmpty(search))
             {
                 campaigns = campaigns.Where(c => c.Title.Contains(search) || c.Description.Contains(search) || c.Category.Name.Contains(search));
@@ -33,6 +34,8 @@ namespace FundMe.Controllers
                 campaigns = campaigns.Where(c => c.Category.Name == category);
             }
             ViewBag.Category = new SelectList(categories);
+
+            campaigns.ToList().ForEach(c => c.CurrentlyRaised = LoadDonation(c.ID));
 
             return View(campaigns.ToList());
         }
@@ -49,6 +52,11 @@ namespace FundMe.Controllers
             {
                 return HttpNotFound();
             }
+            campaign.CurrentlyRaised = LoadDonation(campaign.ID);
+
+            //Popis svih donacija
+            var donations = db.Donations.Where(d => d.CampaignID == id).OrderByDescending(d => d.DonationDate).ToList();
+            ViewBag.Donations = donations;
             return View(campaign);
         }
 
@@ -73,11 +81,16 @@ namespace FundMe.Controllers
             {
                 return HttpNotFound();
             }
+            Donation donation = new Donation()
+            {
+                Iznos = donate,
+                CampaignID = camp.ID,
+                DonationDate = DateTime.Now
+            };
 
-            camp.CurrentlyRaised += donate;
             if (ModelState.IsValid)
             {
-                db.Entry(camp).State = EntityState.Modified;
+                db.Donations.Add(donation);
                 db.SaveChanges();
             }
             return Redirect("Details/" + id);
@@ -115,6 +128,7 @@ namespace FundMe.Controllers
             {
                 return HttpNotFound();
             }
+            campaign.CurrentlyRaised = LoadDonation(campaign.ID);
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", campaign.CategoryID);
             ViewBag.PictureID = new SelectList(db.Images, "ID", "FileName", campaign.PictureID);
             return View(campaign);
@@ -150,6 +164,7 @@ namespace FundMe.Controllers
             {
                 return HttpNotFound();
             }
+            campaign.CurrentlyRaised = LoadDonation(campaign.ID);
             return View(campaign);
         }
 
@@ -171,6 +186,11 @@ namespace FundMe.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private int LoadDonation(int id)
+        {
+            return db.Donations.Where(d => d.CampaignID == id).Select(c => c.Iznos).DefaultIfEmpty(0).Sum();
         }
     }
 }

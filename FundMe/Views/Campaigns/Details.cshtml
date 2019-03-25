@@ -4,6 +4,12 @@
     ViewBag.Title = "Details";
 }
 
+
+<style>
+    .donations{
+        width: 50%;
+    }
+</style>
 <h2>Details</h2>
 
 <div>
@@ -78,8 +84,22 @@
     }
 
 </div>
-
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="donations">
+    <table class="table">
+        <tr>
+            <th>Iznos</th>
+            <th>Datum Donacije</th>
+        </tr>
+        @foreach (var item in ViewBag.Donations)
+        {
+            <tr>
+                <td>@item.Iznos</td>
+                <td>@item.DonationDate</td>
+            </tr>
+        }
+    </table>
+</div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>

@@ -222,11 +222,24 @@
     <Compile Include="Migrations\201903231651268_Update-Image.Designer.cs">
       <DependentUpon>201903231651268_Update-Image.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903241118527_AddedDonation.cs" />
+    <Compile Include="Migrations\201903241118527_AddedDonation.Designer.cs">
+      <DependentUpon>201903241118527_AddedDonation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903241131286_Update-Donation.cs" />
+    <Compile Include="Migrations\201903241131286_Update-Donation.Designer.cs">
+      <DependentUpon>201903241131286_Update-Donation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903251306457_AddedDateToDonation.cs" />
+    <Compile Include="Migrations\201903251306457_AddedDateToDonation.Designer.cs">
+      <DependentUpon>201903251306457_AddedDateToDonation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Adress.cs" />
     <Compile Include="Models\Campaign.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Donation.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Image.cs" />
@@ -337,6 +350,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903231651268_Update-Image.resx">
       <DependentUpon>201903231651268_Update-Image.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903241118527_AddedDonation.resx">
+      <DependentUpon>201903241118527_AddedDonation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903241131286_Update-Donation.resx">
+      <DependentUpon>201903241131286_Update-Donation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903251306457_AddedDateToDonation.resx">
+      <DependentUpon>201903251306457_AddedDateToDonation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
