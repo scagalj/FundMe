@@ -104,17 +104,20 @@ namespace FundMe.Controllers
         public ActionResult Create([Bind(Include = "ID,Title,Description,CampaignsGoal,Date,CategoryID")] Campaign campaign, HttpPostedFileBase file)
         {
             ImagesController images = new ImagesController();
-            images.Upload(file);
-
-
-            campaign.CurrentlyRaised = 0;
-            //campaign.PictureID = db.Images.Single(i => i.FileName == file.FileName).ID;
-            Image image = db.Images.Single(i => i.FileName == file.FileName);
-            if(image != null)
+            if (file == null)
             {
-                campaign.Picture = image;
-                campaign.PictureID = image.ID;
+                ModelState.AddModelError("PictureID", "Please choose a file");
+            }else
+            {
+                images.Upload(file);
+                Image image = db.Images.Single(i => i.FileName == file.FileName);
+                if (image != null)
+                {
+                    campaign.Picture = image;
+                    campaign.PictureID = image.ID;
+                }
             }
+            campaign.CurrentlyRaised = 0;
             if (ModelState.IsValid)
             {
                 db.Campaigns.Add(campaign);
