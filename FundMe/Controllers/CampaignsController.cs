@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using FundMe.DAL;
 using FundMe.Models;
-using Microsoft.Ajax.Utilities;
+using PagedList;
 
 namespace FundMe.Controllers
 {
@@ -18,7 +18,7 @@ namespace FundMe.Controllers
         private FundMeContext db = new FundMeContext();
 
         // GET: Campaigns
-        public ActionResult Index(string category, string search)
+        public ActionResult Index(string category, string search, int? page)
         {
             var campaigns = db.Campaigns.Include(c => c.Category).Include(c => c.Picture);
             
@@ -26,17 +26,20 @@ namespace FundMe.Controllers
             {
                 campaigns = campaigns.Where(c => c.Title.Contains(search) || c.Description.Contains(search) || c.Category.Name.Contains(search));
                 ViewBag.Search = search;
+                page = 1;
             }
 
-            var categories = campaigns.OrderBy(c => c.Category.Name).Select(c => c.Category.Name).Distinct();
-
+            //var categories = campaigns.OrderBy(c => c.Category.Name).Select(c => c.Category.Name).Distinct();
+            var categories = db.Categories.Select(c => c.Name);
             if (!String.IsNullOrEmpty(category))
             {
                 campaigns = campaigns.Where(c => c.Category.Name == category);
             }
             ViewBag.Category = new SelectList(categories);
             ViewBag.Path = Constants.Constants.CampaignsThumbnailsPath;
-            return View(campaigns.ToList());
+            campaigns = campaigns.OrderBy(c => c.StartDate);
+            int PageNumber = (page ?? 1);
+            return View(campaigns.ToPagedList(PageNumber,Constants.Constants.pageSize));
         }
 
         // GET: Campaigns/Details/5
