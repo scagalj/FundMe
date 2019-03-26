@@ -32,7 +32,16 @@ namespace FundMe.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime Date { get; set; }
+        public DateTime StartDate { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime EndDate { get; set; }
+
+        public bool IsActive { get; set; }
+
+        public string Country { get; set; }
+        public string City { get; set; }
 
         public int? CategoryID { get; set; }
         public int? PictureID { get; set; }

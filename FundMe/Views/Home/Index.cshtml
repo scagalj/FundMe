@@ -29,7 +29,7 @@
             @Html.DisplayNameFor(model => model.CampaignsGoal)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            @Html.DisplayNameFor(model => model.StartDate)
         </th>
         <th></th>
     </tr>
@@ -59,7 +59,7 @@
                 @Html.DisplayFor(modelItem => item.CampaignsGoal)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
+                @Html.DisplayFor(modelItem => item.StartDate)
             </td>
             <td>
                 @Html.ActionLink("Details", "Details","Campaigns", new { id = item.ID },null)

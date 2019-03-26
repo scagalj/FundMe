@@ -234,6 +234,10 @@
     <Compile Include="Migrations\201903251306457_AddedDateToDonation.Designer.cs">
       <DependentUpon>201903251306457_AddedDateToDonation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903260837245_UpdatedCampaigns.cs" />
+    <Compile Include="Migrations\201903260837245_UpdatedCampaigns.Designer.cs">
+      <DependentUpon>201903260837245_UpdatedCampaigns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Adress.cs" />
@@ -357,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903251306457_AddedDateToDonation.resx">
       <DependentUpon>201903251306457_AddedDateToDonation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903260837245_UpdatedCampaigns.resx">
+      <DependentUpon>201903260837245_UpdatedCampaigns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

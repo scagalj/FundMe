@@ -101,7 +101,7 @@ namespace FundMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Description,CampaignsGoal,Date,CategoryID")] Campaign campaign, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "ID,Title,Description,CampaignsGoal,Country,City,EndDate,CategoryID")] Campaign campaign, HttpPostedFileBase file)
         {
             ImagesController images = new ImagesController();
             if (file == null)
@@ -118,6 +118,8 @@ namespace FundMe.Controllers
                 }
             }
             campaign.CurrentlyRaised = 0;
+            campaign.IsActive = true;
+            campaign.StartDate = DateTime.Now;
             if (ModelState.IsValid)
             {
                 db.Campaigns.Add(campaign);
@@ -152,7 +154,7 @@ namespace FundMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,Description,CampaignsGoal,Date,CategoryID,PictureID")] Campaign campaign)
+        public ActionResult Edit([Bind(Include = "ID,Title,Description,CampaignsGoal,Country,City,StartDate,EndDate,IsActive,CategoryID,PictureID")] Campaign campaign)
         {
             if (ModelState.IsValid)
             {
