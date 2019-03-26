@@ -188,7 +188,9 @@ namespace FundMe.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Campaign campaign = db.Campaigns.Find(id);
-            db.Images.Remove(DeleteImage(db.Images.Find(campaign.PictureID)));
+            Image image = db.Images.Find(campaign.PictureID);
+            if (image != null)
+                db.Images.Remove(DeleteImage(image));
             db.Campaigns.Remove(campaign);
             db.SaveChanges();
             return RedirectToAction("Index");

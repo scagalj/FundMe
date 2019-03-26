@@ -14,6 +14,7 @@ namespace FundMe.Controllers
         public ActionResult Index()
         {
             var top5 = (from c in db.Campaigns
+                        where c.IsActive == true
                         orderby c.CurrentlyRaised descending
                         select c).Take(3);
 
