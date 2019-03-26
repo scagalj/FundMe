@@ -37,7 +37,7 @@ namespace FundMe.Controllers
             }
             ViewBag.Category = new SelectList(categories);
             ViewBag.Path = Constants.Constants.CampaignsThumbnailsPath;
-            campaigns = campaigns.OrderBy(c => c.StartDate);
+            campaigns = campaigns.OrderByDescending(c => c.StartDate);
             int PageNumber = (page ?? 1);
             return View(campaigns.ToPagedList(PageNumber,Constants.Constants.pageSize));
         }
