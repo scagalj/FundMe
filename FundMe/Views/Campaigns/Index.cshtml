@@ -20,86 +20,43 @@
     <input type="hidden" name="Search" id="Search" value="@ViewBag.Search" />
 }
 
-<table class="table">
-    <tr>
-        <th>
-            <p>Category Name</p>
-        </th>
-        <th>
-            <p>Image</p>
-        </th>
-        <th>
-            <p>Campaign Title</p>
-        </th>
-        <th>
-            <p>Description</p>
-        </th>
-        <th>
-            <p>Currently Raised</p>
-        </th>
-        <th>
-            <p>Campaign Goal</p>
-        </th>
-        <th>
-            <p>Start Date</p>
-        </th>
-        <th>
-            <p>End Date</p>
-        </th>
-        <th>
-            <p>Country</p>
-        </th>
-        <th>
-            <p>City</p>
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
+@foreach(var item in Model)
+{
+    <div class="wrapper" style="margin-bottom:20px; background-color:aliceblue;">
+        <div class="row">
+            <div class="col-sm-3">
                 @if (item.Picture != null)
                 {
-                    <img src="@Url.Content(String.Format("{0}{1}", ViewBag.Path, item.Picture.FileName))" />
+                    <img src="@Url.Content(String.Format("{0}{1}", ViewBag.Path, item.Picture.FileName))" width="220" height="180" />
                 }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CurrentlyRaised)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CampaignsGoal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
-    }
+            </div>
+            <div class="col-sm-6">
+                <div class="camp-title">
+                    <h3>@Html.ActionLink(String.Format("{0}", @Html.DisplayFor(modelItem => item.Title)), "Details", new { id = item.ID })</h3>
+                    <span><b>@item.Country, @item.City</b></span>
+                    <hr style="margin-top:0px; margin-bottom:10px"/>
+                </div>
+                <div class="camp-desc" style="height:65px">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </div>
+                <div class="camp-remaining">
+                    <span>Campagaigns created: <b>@item.StartDate.ToShortDateString() |</b> Remaining: <b>@item.EndDate.Subtract(DateTime.Now).Days.ToString() </b>Days</span> 
+                </div>
+            </div>
+            <div class="col-sm-3 text-center" >
+                <spanc>Campaigns Goal:</spanc>
+                <p><b>@item.CampaignsGoal</b></p>
+                <span>CurrentlyRaised</span>
+                <p><b>@item.CurrentlyRaised</b></p>
+                <meter style="width:120px; height:8px" value="@item.CurrentlyRaised" min="0" max="@item.CampaignsGoal"></meter>
+                <br />
+                <br />
+                <p><input type="button" value="Donate now" onclick="location.href='@Url.Action("Details", "Campaigns", new { id = item.ID })'" /></p>
+            </div>
+        </div>
+    </div>
+}
 
-</table>
 
 <br />
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
