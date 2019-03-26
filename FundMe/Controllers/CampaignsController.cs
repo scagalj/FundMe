@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -126,9 +127,7 @@ namespace FundMe.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", campaign.CategoryID);
-            ViewBag.PictureID = new SelectList(db.Images, "ID", "FileName", campaign.PictureID);
             return View(campaign);
         }
 
@@ -189,6 +188,7 @@ namespace FundMe.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Campaign campaign = db.Campaigns.Find(id);
+            db.Images.Remove(DeleteImage(db.Images.Find(campaign.PictureID)));
             db.Campaigns.Remove(campaign);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -219,5 +219,23 @@ namespace FundMe.Controllers
             }
 
         }
+
+        public class MyDateAttribute : ValidationAttribute
+        {
+            public override bool IsValid(object value)// Return a boolean value: true == IsValid, false != IsValid
+            {
+                DateTime d = Convert.ToDateTime(value);
+                return d >= DateTime.Now; //Dates Greater than or equal to today are valid (true)
+
+            }
+        }
+
+        private Image DeleteImage(Image image)
+        {
+            System.IO.File.Delete(Request.MapPath(Constants.Constants.CampaignsImagePath + image.FileName));
+            System.IO.File.Delete(Request.MapPath(Constants.Constants.CampaignsThumbnailsPath + image.FileName));
+            return image;
+        }
+
     }
 }

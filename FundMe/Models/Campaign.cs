@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using static FundMe.Controllers.CampaignsController;
 
 namespace FundMe.Models
 {
@@ -36,6 +37,7 @@ namespace FundMe.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [MyDate(ErrorMessage = "Invalid date")]
         public DateTime EndDate { get; set; }
 
         public bool IsActive { get; set; }
