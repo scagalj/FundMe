@@ -214,39 +214,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903231105268_InitialDatabase.cs" />
-    <Compile Include="Migrations\201903231105268_InitialDatabase.Designer.cs">
-      <DependentUpon>201903231105268_InitialDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\201903271125551_InitialCreate.cs" />
+    <Compile Include="Migrations\201903271125551_InitialCreate.Designer.cs">
+      <DependentUpon>201903271125551_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903231130578_Add-Data.cs" />
-    <Compile Include="Migrations\201903231130578_Add-Data.Designer.cs">
-      <DependentUpon>201903231130578_Add-Data.cs</DependentUpon>
+    <Compile Include="Migrations\201903271606152_twocontextreset.cs" />
+    <Compile Include="Migrations\201903271606152_twocontextreset.Designer.cs">
+      <DependentUpon>201903271606152_twocontextreset.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903231259208_CampaignsModelUpdate.cs" />
-    <Compile Include="Migrations\201903231259208_CampaignsModelUpdate.Designer.cs">
-      <DependentUpon>201903231259208_CampaignsModelUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903231651268_Update-Image.cs" />
-    <Compile Include="Migrations\201903231651268_Update-Image.Designer.cs">
-      <DependentUpon>201903231651268_Update-Image.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903241118527_AddedDonation.cs" />
-    <Compile Include="Migrations\201903241118527_AddedDonation.Designer.cs">
-      <DependentUpon>201903241118527_AddedDonation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903241131286_Update-Donation.cs" />
-    <Compile Include="Migrations\201903241131286_Update-Donation.Designer.cs">
-      <DependentUpon>201903241131286_Update-Donation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903251306457_AddedDateToDonation.cs" />
-    <Compile Include="Migrations\201903251306457_AddedDateToDonation.Designer.cs">
-      <DependentUpon>201903251306457_AddedDateToDonation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903260837245_UpdatedCampaigns.cs" />
-    <Compile Include="Migrations\201903260837245_UpdatedCampaigns.Designer.cs">
-      <DependentUpon>201903260837245_UpdatedCampaigns.cs</DependentUpon>
+    <Compile Include="Migrations\201903271609467_update_user_fields.cs" />
+    <Compile Include="Migrations\201903271609467_update_user_fields.Designer.cs">
+      <DependentUpon>201903271609467_update_user_fields.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\FundMeConfiguration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Adress.cs" />
     <Compile Include="Models\Campaign.cs" />
@@ -357,29 +338,14 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903231105268_InitialDatabase.resx">
-      <DependentUpon>201903231105268_InitialDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903271125551_InitialCreate.resx">
+      <DependentUpon>201903271125551_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903231130578_Add-Data.resx">
-      <DependentUpon>201903231130578_Add-Data.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903271606152_twocontextreset.resx">
+      <DependentUpon>201903271606152_twocontextreset.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903231259208_CampaignsModelUpdate.resx">
-      <DependentUpon>201903231259208_CampaignsModelUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903231651268_Update-Image.resx">
-      <DependentUpon>201903231651268_Update-Image.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903241118527_AddedDonation.resx">
-      <DependentUpon>201903241118527_AddedDonation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903241131286_Update-Donation.resx">
-      <DependentUpon>201903241131286_Update-Donation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903251306457_AddedDateToDonation.resx">
-      <DependentUpon>201903251306457_AddedDateToDonation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903260837245_UpdatedCampaigns.resx">
-      <DependentUpon>201903260837245_UpdatedCampaigns.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903271609467_update_user_fields.resx">
+      <DependentUpon>201903271609467_update_user_fields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

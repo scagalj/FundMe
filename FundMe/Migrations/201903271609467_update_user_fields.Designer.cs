@@ -7,13 +7,13 @@ namespace FundMe.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class CampaignsModelUpdate : IMigrationMetadata
+    public sealed partial class update_user_fields : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CampaignsModelUpdate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(update_user_fields));
         
         string IMigrationMetadata.Id
         {
-            get { return "201903231259208_CampaignsModelUpdate"; }
+            get { return "201903271609467_update_user_fields"; }
         }
         
         string IMigrationMetadata.Source
