@@ -48,6 +48,7 @@ namespace FundMe.Models
 
         public int? CategoryID { get; set; }
         public int? PictureID { get; set; }
+        public string UserID { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual Image Picture { get; set; }

@@ -227,6 +227,14 @@
     <Compile Include="Migrations\201903271609467_update_user_fields.Designer.cs">
       <DependentUpon>201903271609467_update_user_fields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903281218430_UpdatedCampaigns.cs" />
+    <Compile Include="Migrations\201903281218430_UpdatedCampaigns.Designer.cs">
+      <DependentUpon>201903281218430_UpdatedCampaigns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903281219378_UpdatedCampaigns.cs" />
+    <Compile Include="Migrations\201903281219378_UpdatedCampaigns.Designer.cs">
+      <DependentUpon>201903281219378_UpdatedCampaigns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\FundMeConfiguration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -353,6 +361,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903271609467_update_user_fields.resx">
       <DependentUpon>201903271609467_update_user_fields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903281218430_UpdatedCampaigns.resx">
+      <DependentUpon>201903281218430_UpdatedCampaigns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903281219378_UpdatedCampaigns.resx">
+      <DependentUpon>201903281219378_UpdatedCampaigns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

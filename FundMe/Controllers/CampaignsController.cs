@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using Microsoft.AspNet.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
@@ -121,6 +121,8 @@ namespace FundMe.Controllers
                     campaign.PictureID = image.ID;
                 }
             }
+            var user = User.Identity;
+            campaign.UserID = user.GetUserId();
             campaign.CurrentlyRaised = 0;
             campaign.IsActive = true;
             campaign.StartDate = DateTime.Now;
