@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace FundMe.Controllers
 {
-    [Authorize(Roles = "Users")]
+    [Authorize(Roles = "Admin,Users")]
     public class UserCampaignsController : Controller
     {
         private FundMeContext db = new FundMeContext();

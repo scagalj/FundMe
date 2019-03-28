@@ -311,10 +311,7 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
-    <Content Include="Views\Campaigns\Create.cshtml" />
-    <Content Include="Views\Campaigns\Delete.cshtml" />
     <Content Include="Views\Campaigns\Details.cshtml" />
-    <Content Include="Views\Campaigns\Edit.cshtml" />
     <Content Include="Views\Campaigns\Index.cshtml" />
     <Content Include="Views\Images\Upload.cshtml" />
     <Content Include="Views\Images\Delete.cshtml" />

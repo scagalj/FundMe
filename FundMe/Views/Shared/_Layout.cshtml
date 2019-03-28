@@ -21,10 +21,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Category", "Index", "Categories")</li>
                     <li>@Html.ActionLink("Campaigns", "Index", "Campaigns")</li>
-                    <li>@Html.ActionLink("Upload File", "Index", "Images")</li>
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Admin", "Index", "Admin")</li>

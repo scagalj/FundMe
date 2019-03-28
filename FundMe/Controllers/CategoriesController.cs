@@ -11,6 +11,7 @@ using FundMe.Models;
 
 namespace FundMe.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class CategoriesController : Controller
     {
         private FundMeContext db = new FundMeContext();

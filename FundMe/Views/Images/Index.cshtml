@@ -1,14 +1,21 @@
 ﻿@model IEnumerable<FundMe.Models.Image>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "List of Images";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Upload New Image", "Upload")
-</p>
+<div>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    @if (Request.UrlReferrer != null)
+    {
+        <a class="bottomNav" onclick="history.go(-1); return false;" href="#">Back</a><br />
+    }
+</div>
+
 <table class="table">
     <tr>
         <th>

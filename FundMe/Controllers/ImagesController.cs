@@ -12,6 +12,7 @@ using FundMe.Models;
 
 namespace FundMe.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ImagesController : Controller
     {
         private FundMeContext db = new FundMeContext();

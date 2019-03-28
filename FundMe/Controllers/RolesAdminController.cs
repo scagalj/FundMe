@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 
 namespace FundMe.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RolesAdminController : Controller
     {
         public RolesAdminController()

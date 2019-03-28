@@ -1,11 +1,18 @@
 ﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
 @{
-    ViewBag.Title = "Roles";
+    ViewBag.Title = "List of Roles";
 }
 <h2>@ViewBag.Title</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    @if (Request.UrlReferrer != null)
+    {
+        <a class="bottomNav" onclick="history.go(-1); return false;" href="#">Back</a><br />
+    }
+</div>
+
 <table class="table">
     <tr>
         <th>
