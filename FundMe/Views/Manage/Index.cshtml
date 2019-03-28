@@ -49,7 +49,8 @@ else
     foreach (var item in ViewBag.Campaigns)
     {
         <span>@Html.ActionLink((string)item.Title, "Details","Campaigns", new { id = item.ID},null)</span> <span> | </span>
-        <span> @Html.ActionLink("Edit", "Edit", "Campaigns",new { id = item.ID},null)</span>
+        <span> @Html.ActionLink("Edit", "Edit", "UserCampaigns",new { id = item.ID},null)</span> <span> | </span>
+        <span>@Html.ActionLink("Delete", "Delete", "UserCampaigns", new { id = item.ID }, null)</span>
 
 }
 }

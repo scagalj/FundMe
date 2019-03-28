@@ -210,6 +210,7 @@
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\UserCampaignsController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
     <Compile Include="DAL\FundMeContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -334,6 +335,10 @@
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\UserCampaigns\Create.cshtml" />
+    <Content Include="Views\UserCampaigns\Index.cshtml" />
+    <Content Include="Views\UserCampaigns\Edit.cshtml" />
+    <Content Include="Views\UserCampaigns\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

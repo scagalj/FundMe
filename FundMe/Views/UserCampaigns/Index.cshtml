@@ -9,7 +9,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", "UserCampaigns", null, null)
+    @Html.ActionLink("Create New", "Create")
 </p>
 
 @using (Html.BeginForm("Index", "Campaigns", FormMethod.Get))
@@ -20,7 +20,7 @@
     <input type="hidden" name="Search" id="Search" value="@ViewBag.Search" />
 }
 
-@foreach(var item in Model)
+@foreach (var item in Model)
 {
     <div class="wrapper" style="margin-bottom:20px; background-color:aliceblue;">
         <div class="row">
@@ -34,16 +34,16 @@
                 <div class="camp-title">
                     <h3>@Html.ActionLink(String.Format("{0}", @Html.DisplayFor(modelItem => item.Title)), "Details", new { id = item.ID })</h3>
                     <span><b>@item.Country, @item.City</b></span>
-                    <hr style="margin-top:0px; margin-bottom:10px"/>
+                    <hr style="margin-top:0px; margin-bottom:10px" />
                 </div>
                 <div class="camp-desc" style="height:65px">
                     @Html.DisplayFor(modelItem => item.Description)
                 </div>
                 <div class="camp-remaining">
-                    <span>Campagaigns created: <b>@item.StartDate.ToShortDateString() |</b> Remaining: <b>@item.EndDate.Subtract(DateTime.Now).Days.ToString() </b>Days</span> 
+                    <span>Campagaigns created: <b>@item.StartDate.ToShortDateString() |</b> Remaining: <b>@item.EndDate.Subtract(DateTime.Now).Days.ToString() </b>Days</span>
                 </div>
             </div>
-            <div class="col-sm-3 text-center" >
+            <div class="col-sm-3 text-center">
                 <spanc>Campaigns Goal:</spanc>
                 <p><b>@item.CampaignsGoal</b></p>
                 <span>CurrentlyRaised</span>

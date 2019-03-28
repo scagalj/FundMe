@@ -1,6 +1,5 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -8,101 +7,24 @@ using System.Web;
 using System.Web.Mvc;
 using FundMe.DAL;
 using FundMe.Models;
-using PagedList;
+using Microsoft.AspNet.Identity;
 
 namespace FundMe.Controllers
 {
-    public class CampaignsController : Controller
+    [Authorize(Roles = "Users")]
+    public class UserCampaignsController : Controller
     {
         private FundMeContext db = new FundMeContext();
 
-        // GET: Campaigns
-        public ActionResult Index(string category, string search, int? page)
-        {
-            var campaigns = db.Campaigns.Include(c => c.Category).Include(c => c.Picture);
-            
-            if (!String.IsNullOrEmpty(search))
-            {
-                campaigns = campaigns.Where(c => c.Title.Contains(search) || c.Description.Contains(search) || c.Category.Name.Contains(search));
-                ViewBag.Search = search;
-                page = 1;
-            }
-
-            //var categories = campaigns.OrderBy(c => c.Category.Name).Select(c => c.Category.Name).Distinct();
-            var categories = db.Categories.Select(c => c.Name);
-            if (!String.IsNullOrEmpty(category))
-            {
-                campaigns = campaigns.Where(c => c.Category.Name == category);
-            }
-            ViewBag.Category = new SelectList(categories);
-            ViewBag.Path = Constants.Constants.CampaignsThumbnailsPath;
-            campaigns = campaigns.OrderByDescending(c => c.StartDate);
-            int PageNumber = (page ?? 1);
-            return View(campaigns.ToPagedList(PageNumber,Constants.Constants.pageSize));
-        }
-
-        // GET: Campaigns/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Campaign campaign = db.Campaigns.Find(id);
-            if (campaign == null)
-            {
-                return HttpNotFound();
-            }
-            campaign.CurrentlyRaised = db.Donations.Where(d => d.CampaignID == id).Select(c => c.Iznos).DefaultIfEmpty(0).Sum();
-            ViewBag.Path = Constants.Constants.CampaignsImagePath;
-
-            //Popis svih donacija
-            var donations = db.Donations.Where(d => d.CampaignID == id).OrderByDescending(d => d.DonationDate).ToList();
-            ViewBag.Donations = donations;
-            return View(campaign);
-        }
-
         // GET: Campaigns/Create
-        /*public ActionResult Create()
+        public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name");
             ViewBag.PictureID = new SelectList(db.Images, "ID", "FileName");
             return View();
-        }*/
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Donate(int donate, int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var camp = db.Campaigns.Find(id);
-            if (camp == null)
-            {
-                return HttpNotFound();
-            }
-            Donation donation = new Donation()
-            {
-                Iznos = donate,
-                CampaignID = camp.ID,
-                DonationDate = DateTime.Now
-            };
-
-            SaveDonation(camp, donate);
-            if (ModelState.IsValid)
-            {
-                db.Donations.Add(donation);
-                db.SaveChanges();
-            }
-            return Redirect("Details/" + id);
         }
 
-        // POST: Campaigns/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        /*[HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Title,Description,CampaignsGoal,Country,City,EndDate,CategoryID")] Campaign campaign, HttpPostedFileBase file)
         {
@@ -110,7 +32,8 @@ namespace FundMe.Controllers
             if (file == null)
             {
                 ModelState.AddModelError("PictureID", "Please choose a file");
-            }else
+            }
+            else
             {
                 images.Upload(file);
                 Image image = db.Images.Single(i => i.FileName == file.FileName);
@@ -138,7 +61,7 @@ namespace FundMe.Controllers
         // GET: Campaigns/Edit/5
         public ActionResult Edit(int? id)
         {
-            
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -151,10 +74,10 @@ namespace FundMe.Controllers
 
             if (User.Identity.GetUserId() != campaign.UserID)
             {
-                if(!User.IsInRole("Admin"))
+                if (!User.IsInRole("Admin"))
                     return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
-                campaign.CurrentlyRaised = LoadDonation(campaign.ID);
+            campaign.CurrentlyRaised = db.Donations.Where(d => d.CampaignID == id).Select(c => c.Iznos).DefaultIfEmpty(0).Sum();
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", campaign.CategoryID);
             return View(campaign);
         }
@@ -199,7 +122,6 @@ namespace FundMe.Controllers
                 if (!User.IsInRole("Admin"))
                     return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
-            campaign.CurrentlyRaised = LoadDonation(campaign.ID);
             return View(campaign);
         }
 
@@ -229,37 +151,14 @@ namespace FundMe.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }*/
-        
-
-        private void SaveDonation(Campaign campaign, int donation)
-        {
-            campaign.CurrentlyRaised += donation;
-            if (ModelState.IsValid)
-            {
-                db.Entry(campaign).State = EntityState.Modified;
-                db.SaveChanges();
-               
-            }
-
         }
 
-        public class MyDateAttribute : ValidationAttribute
-        {
-            public override bool IsValid(object value)// Return a boolean value: true == IsValid, false != IsValid
-            {
-                DateTime d = Convert.ToDateTime(value);
-                return d >= DateTime.Now; //Dates Greater than or equal to today are valid (true)
-
-            }
-        }
-        /*
         private Image DeleteImage(Image image)
         {
             System.IO.File.Delete(Request.MapPath(Constants.Constants.CampaignsImagePath + image.FileName));
             System.IO.File.Delete(Request.MapPath(Constants.Constants.CampaignsThumbnailsPath + image.FileName));
             return image;
-        }*/
+        }
 
     }
 }

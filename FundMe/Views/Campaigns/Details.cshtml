@@ -127,7 +127,12 @@
         }
     </table>
 </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+<p>
+    <div>
+        @if (Request.UrlReferrer != null)
+        {
+
+            <a class="bottomNav" onclick="history.go(-1); return false;" href="#">Back</a><br />
+        }
+    </div>
+</p>
