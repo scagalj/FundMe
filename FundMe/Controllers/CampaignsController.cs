@@ -139,6 +139,7 @@ namespace FundMe.Controllers
         // GET: Campaigns/Edit/5
         public ActionResult Edit(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -148,7 +149,13 @@ namespace FundMe.Controllers
             {
                 return HttpNotFound();
             }
-            campaign.CurrentlyRaised = LoadDonation(campaign.ID);
+
+            if (User.Identity.GetUserId() != campaign.UserID)
+            {
+                if(!User.IsInRole("Admin"))
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+                campaign.CurrentlyRaised = LoadDonation(campaign.ID);
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", campaign.CategoryID);
             return View(campaign);
         }
@@ -160,6 +167,11 @@ namespace FundMe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Title,Description,CampaignsGoal,Country,City,StartDate,EndDate,IsActive,CategoryID,PictureID")] Campaign campaign)
         {
+            if (User.Identity.GetUserId() != campaign.UserID)
+            {
+                if (!User.IsInRole("Admin"))
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(campaign).State = EntityState.Modified;
@@ -183,6 +195,11 @@ namespace FundMe.Controllers
             {
                 return HttpNotFound();
             }
+            if (User.Identity.GetUserId() != campaign.UserID)
+            {
+                if (!User.IsInRole("Admin"))
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             campaign.CurrentlyRaised = LoadDonation(campaign.ID);
             return View(campaign);
         }
@@ -193,6 +210,11 @@ namespace FundMe.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Campaign campaign = db.Campaigns.Find(id);
+            if (User.Identity.GetUserId() != campaign.UserID)
+            {
+                if (!User.IsInRole("Admin"))
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             Image image = db.Images.Find(campaign.PictureID);
             if (image != null)
                 db.Images.Remove(DeleteImage(image));

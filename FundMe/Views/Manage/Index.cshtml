@@ -14,28 +14,42 @@
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.LastName)
-    </dt>
-    <dd>
-        @Html.DisplayFor(model => model.LastName)
-    </dd>
-    <dt>
-        @Html.DisplayNameFor(model => model.Email)
-    </dt>
-    <dd>
-        @Html.DisplayFor(model => model.Email)
-    </dd>
-    <dt>
-        @Html.DisplayNameFor(model => model.DateOfBirth)
-    </dt>
-    <dd>
-        @Html.DisplayFor(model => model.DateOfBirth)
-    </dd>
-    @Html.DisplayFor(model => model.Adress)
-    <dt>
-        Password
-    </dt>
-    <dd>
-        @Html.ActionLink("Change your password", "ChangePassword")
-    </dd>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+        @Html.DisplayFor(model => model.Adress)
+        <dt>
+            Password
+        </dt>
+        <dd>
+            @Html.ActionLink("Change your password", "ChangePassword")
+        </dd>
     </dl>
 </div>
+
+@if (ViewBag.Count <= 0)
+{
+    <p>You don't have any Campaigns</p>
+}
+else
+{
+    foreach (var item in ViewBag.Campaigns)
+    {
+        <span>@Html.ActionLink((string)item.Title, "Details","Campaigns", new { id = item.ID},null)</span> <span> | </span>
+        <span> @Html.ActionLink("Edit", "Edit", "Campaigns",new { id = item.ID},null)</span>
+
+}
+}

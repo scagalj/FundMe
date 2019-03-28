@@ -7,12 +7,15 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FundMe.Models;
+using FundMe.DAL;
 
 namespace FundMe.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
+        private FundMeContext db = new FundMeContext();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -56,6 +59,9 @@ namespace FundMe.Controllers
         {
             var userId = User.Identity.GetUserId();
             var user = await UserManager.FindByIdAsync(userId);
+            var camp = db.Campaigns.Where(c => c.UserID == userId);
+            ViewBag.Campaigns = camp.ToList();
+            ViewBag.Count = camp.Count();
             return View(user);
         }
 
