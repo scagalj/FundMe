@@ -32,9 +32,16 @@
             </div>
             <div class="col-sm-6">
                 <div class="camp-title">
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <span style="float:right;">
+                            <span> @Html.ActionLink("Edit", "Edit", "UserCampaigns", new { id = item.ID }, null)</span> <span> | </span>
+                            <span>@Html.ActionLink("Delete", "Delete", "UserCampaigns", new { id = item.ID }, null)</span>
+                        </span>
+                    }
                     <h3>@Html.ActionLink(String.Format("{0}", @Html.DisplayFor(modelItem => item.Title)), "Details", new { id = item.ID })</h3>
                     <span><b>@item.Country, @item.City</b></span>
-                    <hr style="margin-top:0px; margin-bottom:10px"/>
+                    <hr style="margin-top:0px; margin-bottom:10px" />
                 </div>
                 <div class="camp-desc" style="height:65px">
                     @Html.DisplayFor(modelItem => item.Description)
