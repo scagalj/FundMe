@@ -4,67 +4,44 @@
     ViewBag.Title = "Home Page";
 }
 
-<br />
-<br />
-<br />
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Category.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Picture.FileName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CurrentlyRaised)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CampaignsGoal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </th>
-        <th></th>
-    </tr>
+<link rel="stylesheet" href="~/Content/WebStyle.css">
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                @if (item.Picture != null)
-                {
-                    <img src="@Url.Content(String.Format("{0}{1}", ViewBag.Path, item.Picture.FileName))" />
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CurrentlyRaised)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CampaignsGoal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details","Campaigns", new { id = item.ID },null)
-            </td>
-        </tr>
-    }
 
-</table>
+<div class="index-wrapper">
+    <h2 class="camp-text">Top fundraisers</h2>
+    <hr />
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-4">
+                    <div class="comp-innerbody">
+                        <div class="camp-img">
+                            @if (item.Picture != null)
+                            {
+                                <img src="@Url.Content(String.Format("{0}{1}", ViewBag.Path, item.Picture.FileName))" class="img-rounded" />
+                            }
+                        </div>
+                        <div class="camp-title">
+                            <h3>@Html.ActionLink(String.Format("{0}", @Html.DisplayFor(modelItem => item.Title)), "Details", "Campaigns", new { id = item.ID }, null)</h3>
+                            <span><b>@item.Country, @item.City</b></span>
+                            <hr class="camp-hr" />
+                        </div>
+                        <div class="camp-desc">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </div>
+                        <div class="camp-donate text-center">
+                            <meter class="camp-meter" value="@item.CurrentlyRaised" min="0" max="@item.CampaignsGoal"></meter>
+                            <p>Raised <b>@item.CurrentlyRaised HRK</b> out of <b>@item.CampaignsGoal HRK</b></p>
+                        </div>
+                        <hr class="camp-hr" />
+                        <div class="camp-remaining">
+                            <span>Created: <b>@item.StartDate.ToShortDateString()</b></span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
