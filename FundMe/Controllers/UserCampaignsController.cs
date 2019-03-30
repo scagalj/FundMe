@@ -52,7 +52,7 @@ namespace FundMe.Controllers
             {
                 db.Campaigns.Add(campaign);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Campaigns",null);
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", campaign.CategoryID);
             return View(campaign);
@@ -98,7 +98,7 @@ namespace FundMe.Controllers
             {
                 db.Entry(campaign).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Campaigns", null);
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", campaign.CategoryID);
             ViewBag.PictureID = new SelectList(db.Images, "ID", "FileName", campaign.PictureID);
@@ -141,7 +141,7 @@ namespace FundMe.Controllers
                 db.Images.Remove(DeleteImage(image));
             db.Campaigns.Remove(campaign);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Campaigns", null);
         }
 
         protected override void Dispose(bool disposing)
