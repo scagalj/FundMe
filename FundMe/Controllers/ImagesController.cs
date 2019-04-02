@@ -173,14 +173,14 @@ namespace FundMe.Controllers
         private void SaveFileToDisk(HttpPostedFileBase file)
         {
             WebImage img = new WebImage(file.InputStream);
-            if (img.Width > 190)
+            if (img.Width > 250)
             {
-                img.Resize(220, img.Height);
+                img.Resize(250, img.Height);
             }
             img.Save(Constants.Constants.CampaignsImagePath + file.FileName);
-            if (img.Width > 100)
+            if (img.Width > 250)
             {
-                img.Resize(100, img.Height);
+                img.Resize(180, img.Height);
             }
             img.Save(Constants.Constants.CampaignsThumbnailsPath + file.FileName);
         }

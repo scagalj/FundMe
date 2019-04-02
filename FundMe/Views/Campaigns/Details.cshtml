@@ -27,14 +27,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Picture.FileName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Picture.FileName)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Title)
         </dt>
 
@@ -129,10 +121,6 @@
 </div>
 <p>
     <div>
-        @if (Request.UrlReferrer != null)
-        {
-
-            <a class="bottomNav" onclick="history.go(-1); return false;" href="#">Back</a><br />
-        }
+       @Html.ActionLink("Back", "Index")
     </div>
 </p>

@@ -29,6 +29,10 @@
                 {
                     <img src="@Url.Content(String.Format("{0}{1}", ViewBag.Path, item.Picture.FileName))" width="220" height="180" />
                 }
+                else
+                {
+                    <img src="~/Content/ProductImages/noImage.png" width="220" height="180" />
+                }
             </div>
             <div class="col-sm-6">
                 <div class="camp-title">
