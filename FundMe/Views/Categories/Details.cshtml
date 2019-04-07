@@ -20,6 +20,16 @@
 
     </dl>
 </div>
+
+@{ 
+    var text = "Hello World";
+}
+<p>@text</p>
+
+@for(int i = 0; i < 10; i++){
+    <p>@i</p>
+}
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")

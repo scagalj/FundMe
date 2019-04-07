@@ -1,21 +1,24 @@
 ﻿@{
     ViewBag.Title = "Admin";
 }
+
+<link rel="stylesheet" href="~/Content/WebStyle.css">
+
 <h2>@ViewBag.Title</h2>
 <div class="container">
     <div class="row">
-        @Html.ActionLink("Manage Images", "Index", "Images")
+        @Html.ActionLink("Manage Images", "Index", "Images", null, new { @class = "btn btn-primary" })
     </div>
     <div class="row">
-        @Html.ActionLink("Manage Campaigns", "Index", "Campaigns")
+        @Html.ActionLink("Manage Campaigns", "Index", "Campaigns", null, new { @class = "btn btn-primary" })
     </div>
     <div class="row">
-        @Html.ActionLink("Manage Category", "Index", "Categories")
+        @Html.ActionLink("Manage Category", "Index", "Categories", null, new { @class = "btn btn-primary" })
     </div>
     <div class="row">
-        @Html.ActionLink("Manage Roles", "Index", "RolesAdmin")
+        @Html.ActionLink("Manage Roles", "Index", "RolesAdmin", null, new { @class = "btn btn-primary" })
     </div>
     <div class="row">
-        @Html.ActionLink("Manage Users", "Index", "UsersAdmin")
+        @Html.ActionLink("Manage Users", "Index", "UsersAdmin", null, new { @class = "btn btn-primary" })
     </div>
 </div>

@@ -15,14 +15,16 @@
 @using (Html.BeginForm("Index", "Campaigns", FormMethod.Get))
 {
     <label>Filter by Category:</label>
-    @Html.DropDownList("Category", "All")
-    <input type="submit" value="Filter" />
+    @Html.DropDownList("Category","All")
+    <input type="submit" value="Filter Campaigns" class="btn btn-primary" />
     <input type="hidden" name="Search" id="Search" value="@ViewBag.Search" />
 }
+<br />
 
 @foreach(var item in Model)
 {
-    <div class="wrapper" style="margin-bottom:20px; background-color:aliceblue;">
+    <br />
+    <div class="wrapper" style="margin-bottom:20px; background-color: #f2f2f2 ;">
         <div class="row">
             <div class="col-sm-3">
                 @if (item.Picture != null)
@@ -39,8 +41,8 @@
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <span style="float:right;">
-                            <span> @Html.ActionLink("Edit", "Edit", "UserCampaigns", new { id = item.ID }, null)</span> <span> | </span>
-                            <span>@Html.ActionLink("Delete", "Delete", "UserCampaigns", new { id = item.ID }, null)</span>
+                            <span> @Html.ActionLink("Edit", "Edit", "UserCampaigns", new { id = item.ID },new { @class = "btn btn-primary" })</span>
+                            <span>@Html.ActionLink("Delete", "Delete", "UserCampaigns", new { id = item.ID }, new { @class = "btn btn-danger" })</span>
                         </span>
                     }
                     <h3>@Html.ActionLink(String.Format("{0}", @Html.DisplayFor(modelItem => item.Title)), "Details", new { id = item.ID })</h3>
@@ -56,13 +58,13 @@
             </div>
             <div class="col-sm-3 text-center" >
                 <spanc>Campaigns Goal:</spanc>
-                <p><b>@item.CampaignsGoal</b></p>
+                <p><b>@item.CampaignsGoal HRK</b></p>
                 <span>CurrentlyRaised</span>
-                <p><b>@item.CurrentlyRaised</b></p>
+                <p><b>@item.CurrentlyRaised HRK</b></p>
                 <meter style="width:120px; height:8px" value="@item.CurrentlyRaised" min="0" max="@item.CampaignsGoal"></meter>
                 <br />
                 <br />
-                <p><input type="button" value="Donate now" onclick="location.href='@Url.Action("Details", "Campaigns", new { id = item.ID })'" /></p>
+                <p><input type="button" value="Donate now" onclick="location.href='@Url.Action("Details", "Campaigns", new { id = item.ID })'" class="btn btn-success"/></p>
             </div>
         </div>
     </div>

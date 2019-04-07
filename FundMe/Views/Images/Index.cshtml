@@ -4,18 +4,32 @@
     ViewBag.Title = "List of Images";
 }
 
-<h2>@ViewBag.Title</h2>
 
+<h2>@ViewBag.Title</h2>
 <div>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    @if (Request.UrlReferrer != null)
-    {
-        <a class="bottomNav" onclick="history.go(-1); return false;" href="#">Back</a><br />
-    }
+    @Html.ActionLink("Upload Image", "Upload", null, new { @class = "btn btn-success" })
+</div>
+<hr />
+
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-2 col-sm-4 col-xs-6" style="padding-bottom:20px;">
+                <img src="@Url.Content(String.Format("{0}{1}", ViewBag.Path, item.FileName))" style="width:90px;height:90px;" />
+                <div>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </div>
+            </div>
+
+        }
+    </div>
 </div>
 
+<!--
 <table class="table">
     <tr>
         <th>
@@ -27,19 +41,27 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FileName)
-        </td>
-        <td>
-            <img src="@Url.Content(String.Format("{0}{1}", ViewBag.Path, item.FileName))" />
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+
+ @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileName)
+            </td>
+            <td>
+                <img src="@Url.Content(String.Format("{0}{1}", ViewBag.Path, item.FileName))" style="width:90px;height:90px;" />
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
+-->
+</p>
+@if (Request.UrlReferrer != null)
+{
+    <a class="bottomNav" onclick="history.go(-1); return false;" href="#">Back</a><br />
+}

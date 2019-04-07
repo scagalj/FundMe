@@ -40,7 +40,7 @@
     </dl>
 </div>
 
-<h4>Campaigns: </h4>
+<h2>Campaigns: </h2>
 <hr />
 
 @if (ViewBag.Count <= 0)
@@ -49,11 +49,15 @@
 }
 else
 {
-    foreach (var item in ViewBag.Campaigns)
-    {
-        <span>@Html.ActionLink((string)item.Title, "Details","Campaigns", new { id = item.ID},null)</span> <span> | </span>
-        <span> @Html.ActionLink("Edit", "Edit", "UserCampaigns",new { id = item.ID},null)</span> <span> | </span>
-        <span>@Html.ActionLink("Delete", "Delete", "UserCampaigns", new { id = item.ID }, null)</span>
+    <table>
+        @foreach (var item in ViewBag.Campaigns)
+        {
 
-}
+            <tr><td>
+            <h4> @Html.ActionLink((string)item.Title, "Details", "Campaigns", new { id = item.ID }, null)</h4>
+            @Html.ActionLink("Edit", "Edit", "UserCampaigns", new { id = item.ID }, new { @class = "btn btn-success"})
+            @Html.ActionLink("Delete", "Delete", "UserCampaigns", new { id = item.ID }, new { @class = "btn btn-danger" })</td></tr>
+
+        }
+    </table>
 }

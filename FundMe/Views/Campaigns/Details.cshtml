@@ -6,103 +6,111 @@
 
 
 <style>
-    .donations{
+    .donations {
         width: 50%;
     }
 </style>
-<h2>Details</h2>
+<h2>
+    @Html.DisplayFor(model => model.Title)
+</h2>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <img src="@Url.Content(String.Format("{0}{1}", ViewBag.Path, Model.Picture.FileName))" />
+        </div>
+        <div class="col-sm-9">
+            <dl class="dl-horizontal">
 
-<div>
-    <h4>Campaign</h4>
-    <hr />
-        <img src="@Url.Content(String.Format("{0}{1}", ViewBag.Path, Model.Picture.FileName))" />
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.Name)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category.Name)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                <dt>
+                @Html.DisplayNameFor(model => model.Category.Name)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Category.Name)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CampaignsGoal)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CampaignsGoal)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CampaignsGoal)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CurrentlyRaised)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.CampaignsGoal)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CurrentlyRaised)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CurrentlyRaised)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.CurrentlyRaised)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StartDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.EndDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Country)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Country)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Country)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.City)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.City)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-    </dl>
+                <dd>
+                    @Html.DisplayFor(model => model.IsActive)
+                </dd>
+            </dl>
+        </div>
+    </div>
 </div>
+<h2> Donations</h2>
+<hr />
 <div>
     @using (Html.BeginForm("Donate", "Campaigns", FormMethod.Post))
     {
-         @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
         <input type="number" name="donate" />
         @Html.HiddenFor(model => model.ID);
         <input type="submit" />
     }
-
+    <br />
 </div>
 <div class="donations">
     <table class="table">
@@ -121,6 +129,6 @@
 </div>
 <p>
     <div>
-       @Html.ActionLink("Back", "Index")
+        @Html.ActionLink("Back", "Index")
     </div>
 </p>
