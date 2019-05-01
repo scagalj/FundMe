@@ -87,7 +87,7 @@ namespace FundMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,Description,CampaignsGoal,CurrentlyRaised,Country,City,StartDate,EndDate,IsActive,CategoryID,PictureID")] Campaign campaign)
+        public ActionResult Edit([Bind(Include = "ID,Title,Description,CampaignsGoal,CurrentlyRaised,Country,City,StartDate,EndDate,IsActive,CategoryID,PictureID,UserID")] Campaign campaign)
         {
             if (User.Identity.GetUserId() != campaign.UserID)
             {
