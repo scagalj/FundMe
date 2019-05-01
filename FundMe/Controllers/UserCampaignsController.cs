@@ -74,7 +74,7 @@ namespace FundMe.Controllers
 
             if (User.Identity.GetUserId() != campaign.UserID)
             {
-                if (!User.IsInRole("Admin"))
+                if (!User.IsInRole("Admin") )
                     return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
             campaign.CurrentlyRaised = db.Donations.Where(d => d.CampaignID == id).Select(c => c.Iznos).DefaultIfEmpty(0).Sum();
@@ -87,7 +87,7 @@ namespace FundMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,Description,CampaignsGoal,Country,City,StartDate,EndDate,IsActive,CategoryID,PictureID")] Campaign campaign)
+        public ActionResult Edit([Bind(Include = "ID,Title,Description,CampaignsGoal,CurrentlyRaised,Country,City,StartDate,EndDate,IsActive,CategoryID,PictureID")] Campaign campaign)
         {
             if (User.Identity.GetUserId() != campaign.UserID)
             {
@@ -96,6 +96,7 @@ namespace FundMe.Controllers
             }
             if (ModelState.IsValid)
             {
+                //campaign.CurrentlyRaised = db.Donations.Where(d => d.CampaignID == campaign.ID).Select(c => c.Iznos).DefaultIfEmpty(0).Sum();
                 db.Entry(campaign).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index", "Campaigns", null);

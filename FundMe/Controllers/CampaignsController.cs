@@ -2,6 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -9,6 +11,7 @@ using System.Web.Mvc;
 using FundMe.DAL;
 using FundMe.Models;
 using PagedList;
+using System.Diagnostics;
 
 namespace FundMe.Controllers
 {
@@ -28,7 +31,6 @@ namespace FundMe.Controllers
                 page = 1;
             }
 
-            //var categories = campaigns.OrderBy(c => c.Category.Name).Select(c => c.Category.Name).Distinct();
             var categories = db.Categories.Select(c => c.Name);
             if (!String.IsNullOrEmpty(category))
             {

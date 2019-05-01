@@ -3,7 +3,7 @@ namespace FundMe.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class UpdatedCampaigns : DbMigration
+    public partial class database_update_2 : DbMigration
     {
         public override void Up()
         {

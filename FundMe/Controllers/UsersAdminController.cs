@@ -18,8 +18,7 @@ namespace FundMe.Controllers
         public UsersAdminController()
         {
         }
-        public UsersAdminController(ApplicationUserManager userManager, ApplicationRoleManager
-        roleManager)
+        public UsersAdminController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
         {
             UserManager = userManager;
             RoleManager = roleManager;

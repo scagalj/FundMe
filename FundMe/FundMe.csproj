@@ -56,6 +56,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -228,13 +230,13 @@
     <Compile Include="Migrations\201903271609467_update_user_fields.Designer.cs">
       <DependentUpon>201903271609467_update_user_fields.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903281218430_UpdatedCampaigns.cs" />
-    <Compile Include="Migrations\201903281218430_UpdatedCampaigns.Designer.cs">
-      <DependentUpon>201903281218430_UpdatedCampaigns.cs</DependentUpon>
+    <Compile Include="Migrations\201904161836522_database_update_2.cs" />
+    <Compile Include="Migrations\201904161836522_database_update_2.Designer.cs">
+      <DependentUpon>201904161836522_database_update_2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903281219378_UpdatedCampaigns.cs" />
-    <Compile Include="Migrations\201903281219378_UpdatedCampaigns.Designer.cs">
-      <DependentUpon>201903281219378_UpdatedCampaigns.cs</DependentUpon>
+    <Compile Include="Migrations\201905011136174_updatedCampaigns.cs" />
+    <Compile Include="Migrations\201905011136174_updatedCampaigns.Designer.cs">
+      <DependentUpon>201905011136174_updatedCampaigns.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\FundMeConfiguration.cs" />
@@ -339,6 +341,7 @@
     <Content Include="Views\UserCampaigns\Index.cshtml" />
     <Content Include="Views\UserCampaigns\Edit.cshtml" />
     <Content Include="Views\UserCampaigns\Delete.cshtml" />
+    <Content Include="Views\Manage\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -367,12 +370,15 @@
     <EmbeddedResource Include="Migrations\201903271609467_update_user_fields.resx">
       <DependentUpon>201903271609467_update_user_fields.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903281218430_UpdatedCampaigns.resx">
-      <DependentUpon>201903281218430_UpdatedCampaigns.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904161836522_database_update_2.resx">
+      <DependentUpon>201904161836522_database_update_2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903281219378_UpdatedCampaigns.resx">
-      <DependentUpon>201903281219378_UpdatedCampaigns.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905011136174_updatedCampaigns.resx">
+      <DependentUpon>201905011136174_updatedCampaigns.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

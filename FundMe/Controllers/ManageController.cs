@@ -8,6 +8,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FundMe.Models;
 using FundMe.DAL;
+using FundMe.ViewsModels;
+using System.Net;
 
 namespace FundMe.Controllers
 {
@@ -35,9 +37,9 @@ namespace FundMe.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -202,6 +204,66 @@ namespace FundMe.Controllers
             }
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
+
+
+        // GET: UsersAdmin/Edit/5
+        public async Task<ActionResult> Edit()
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            var userRoles = await UserManager.GetRolesAsync(user.Id);
+            return View(new EditUserViewModel()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                DateOfBirth = user.DateOfBirth,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Adress = user.Adress,
+
+            });
+        }
+
+        // POST: UsersAdmin/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(EditUserViewModel editUser, params string[] selectedRole)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                user.DateOfBirth = editUser.DateOfBirth;
+                user.FirstName = editUser.FirstName;
+                user.LastName = editUser.LastName;
+                user.Adress = editUser.Adress;
+                var userRoles = await UserManager.GetRolesAsync(user.Id);
+                selectedRole = selectedRole ?? new string[] { };
+                var result = await UserManager.AddToRolesAsync(user.Id, selectedRole.Except(userRoles).ToArray<string>());
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("", result.Errors.First());
+                    return View();
+                }
+                result = await UserManager.RemoveFromRolesAsync(user.Id,
+                userRoles.Except(selectedRole).ToArray<string>());
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("", result.Errors.First());
+                    return View();
+                }
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "Something failed.");
+            return View();
+        }
+
 
         //
         // GET: /Manage/ChangePassword

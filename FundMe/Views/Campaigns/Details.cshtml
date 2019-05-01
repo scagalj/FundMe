@@ -18,6 +18,7 @@
     <div class="row">
         <div class="col-sm-3">
             <img src="@Url.Content(String.Format("{0}{1}", ViewBag.Path, Model.Picture.FileName))" />
+
         </div>
         <div class="col-sm-9">
             <dl class="dl-horizontal">
@@ -31,15 +32,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.Description)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Description)
-                </dd>
-
-                <dt>
-                @Html.DisplayNameFor(model => model.Category.Name)
+                    @Html.DisplayNameFor(model => model.Category.Name)
                 </dt>
 
                 <dd>
@@ -97,6 +90,10 @@
                 </dd>
             </dl>
         </div>
+    </div>
+    <div style="padding-top:10px;">
+        <h4>@Html.DisplayNameFor(model => model.Description)</h4>
+        @Html.TextAreaFor(model => model.Description, 5, 60, htmlAttributes: new { style = "width: 50%; max-width: 50%;" })
     </div>
 </div>
 <h2> Donations</h2>

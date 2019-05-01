@@ -16,7 +16,7 @@ namespace FundMe.Models
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Campaign description can't be empty")]
-        [StringLength(200, MinimumLength = 10, ErrorMessage = "Description must be between 10 and 200 characters")]
+        [StringLength(500, MinimumLength = 10, ErrorMessage = "Description must be between 10 and 500 characters")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
